@@ -10,6 +10,7 @@ const modalTitle = document.getElementById('modalTitle');
 const nextBtn = document.getElementById('nextBtn');
 const finale = document.getElementById('finale');
 const surpriseVideo = document.getElementById('surpriseVideo');
+const wishSound = document.getElementById('wishSound');
 const STORAGE_KEY = 'student-wishes-opened-v1';
 
 let wishes = [];
@@ -18,6 +19,12 @@ let currentIndex = 0;
 
 function saveProgress() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify([...opened].sort((a, b) => a - b)));
+}
+
+function playWishSound() {
+  if (!wishSound) return;
+  wishSound.currentTime = 0;
+  wishSound.play().catch(() => {});
 }
 
 function updateProgress() {
@@ -53,7 +60,14 @@ function renderTiles() {
   updateProgress();
 }
 
+function loadWishes(data) {
+  wishes = data;
+  opened = new Set([...opened].filter((index) => index >= 0 && index < wishes.length));
+  renderTiles();
+}
+
 function openWish(index) {
+  playWishSound();
   currentIndex = index;
   opened.add(index);
   saveProgress();
@@ -94,11 +108,11 @@ resetBtn.addEventListener('click', () => {
 
 fetch('wishes.json')
   .then((response) => response.json())
-  .then((data) => {
-    wishes = data;
-    opened = new Set([...opened].filter((index) => index >= 0 && index < wishes.length));
-    renderTiles();
-  })
+  .then(loadWishes)
   .catch(() => {
+    if (Array.isArray(window.WISHES)) {
+      loadWishes(window.WISHES);
+      return;
+    }
     grid.innerHTML = '<p>Không thể tải lời chúc. Vui lòng kiểm tra file wishes.json.</p>';
   });
