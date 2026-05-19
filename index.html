@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>28 Lời Chúc Yêu Thương</title>
+  <meta name="description" content="Một website tương tác gồm 28 lời chúc dành cho học sinh và video bất ngờ từ cô giáo." />
+  <meta property="og:title" content="28 Lời Chúc Yêu Thương" />
+  <meta property="og:description" content="Mở từng lời chúc và nhận món quà bất ngờ cuối cùng." />
+  <meta name="theme-color" content="#f7b7d7" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero__badge">Món quà nhỏ từ cô Chi</div>
+      <h1 id="page-title">28 Lời Chúc Yêu Thương</h1>
+      <p class="hero__subtitle">Mỗi ô là một lời nhắn dịu dàng. Hãy mở lần lượt từng lời chúc, và khi cả lớp hoàn thành, món quà bất ngờ sẽ xuất hiện.</p>
+      <div class="progress-card" aria-live="polite">
+        <div class="progress-card__top">
+          <span id="progressText">Đã mở 0/28 lời chúc</span>
+          <button id="resetBtn" type="button" class="ghost-btn">Mở lại từ đầu</button>
+        </div>
+        <div class="progress-bar" aria-hidden="true"><span id="progressBar"></span></div>
+      </div>
+    </section>
+
+    <section class="wish-grid" id="wishGrid" aria-label="Danh sách 28 lời chúc"></section>
+
+    <section class="finale" id="finale" aria-live="polite">
+      <div class="finale__content">
+        <span class="finale__icon">🎁</span>
+        <h2>Điều bất ngờ cuối cùng</h2>
+        <p>Cả lớp đã mở đủ 28 lời chúc. Bây giờ cùng xem video đặc biệt từ cô nhé.</p>
+        <video id="surpriseVideo" controls playsinline preload="metadata" poster="" >
+          <source src="assets/surprise-video.mp4" type="video/mp4" />
+          Trình duyệt của bạn chưa hỗ trợ phát video. Hãy thử mở bằng Chrome, Safari hoặc Edge phiên bản mới.
+        </video>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 tienhuynh-tn. All rights reserved.</p>
+  </footer>
+
+  <div class="modal" id="wishModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal__overlay" data-close-modal></div>
+    <article class="modal__card">
+      <button class="modal__close" type="button" aria-label="Đóng lời chúc" data-close-modal>×</button>
+      <div class="modal__number" id="modalNumber">01</div>
+      <h2 id="modalTitle">Lời chúc</h2>
+      <p id="modalWish"></p>
+      <button id="nextBtn" class="primary-btn" type="button">Mở lời chúc tiếp theo</button>
+    </article>
+  </div>
+
+  <script>
+    window.WISH_ICONS = ["🌟", "💭", "💗", "✨", "🌈", "📖", "⭐", "🤗", "🫶", "🌻", "🌞", "🧩", "🧭", "🧱", "🗓️", "🤝", "🕊️", "🏮", "🔭", "🌿", "🚪", "🎨", "🏃", "👀", "🌦️", "☀️", "🪷", "🦁"];
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
